@@ -1,25 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Provider } from "react-redux";
+import Formulario from "./containers/Formulario";
+import store from "./store";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Editar from "./pages/editar";
+import Tabela from "./components/TabelaCadastro";
+import { DadosCadastro } from "./models";
+
+const rotas = createBrowserRouter([
+  {
+    path: "/edit/:id",
+    element: <Editar />,
+  },
+  {
+    path: "/",
+    element: <Formulario />,
+  },
+]);
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Provider store={store}>
+        <RouterProvider router={rotas} />
+      </Provider>
+    </>
   );
 }
 
